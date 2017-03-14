@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<nav class="navbar navbar-default ">
+    <div class="container" ng-init="flag=true">
+        <ul class="nav navbar-nav">
+            <li>
+                <a ui-sref="home" ng-click="flag=!flag">首页</a>
+            </li>
+            <li >
+                <a ui-sref="user" ng-click="flag=!flag">用户列表</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div ui-view></div>
+<script src="angular.js"></script>
+<script src="angular-ui-router.js"></script>
+<script>
+    var app = angular.module('appModule',['ui.router']);
+ /*   app.controller('app',function($scope){
+        $scope.flag
+    })*/
+    app.config(function ($stateProvider,$urlRouterProvider) {
+        //当ui-sref等于这个状态的时候home  绑定的是路由
+        $stateProvider.state('home',{
+            url:'/home',
+            views:{
+                '':{
+                  templateUrl:'tmpl/home.html' //引用默认模板
+                },//默认渲染home.html
+                'tmpl1@home':{//这是默认的
+                    templateUrl:'tmpl/tmp1.html' //引用具体的模板
+                },
+                'tmpl2@home':{
+                    templateUrl:'tmpl/tmp2.html' //引用具体的模板
+                }
+            }
+            //templateUrl:'tmpl/home.html',
+        }).state('home.news',{
+            url:'/news',
+            templateUrl:'tmpl/news.html',
+            controller: function ($scope,$state) {//$state跳转页面等同于$location
+                $scope.go = function () {
+                    //路由传递参数
+                    $state.go('home.play',{name:'zpfx'})
+                }
+            }
+        }).state('home.play',{
+            url:'/play/:name',//传递参数
+            templateUrl:'tmpl/play.html',
+            controller: function ($scope,$stateParams) {//routeParams
+                $scope.name = $stateParams.name;
+                //通过$stateParams将参数取过来
+            }
+
+        }).state('user',{
+            url:'/user',
+            template:'<div>user</div>'
+        });
+        //配置不满足的路由,$urlRouterProvider自带的服务
+        $urlRouterProvider.otherwise('home');
+    })
+</script>
+
+
+</body>
+</html>

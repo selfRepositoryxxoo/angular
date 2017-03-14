@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-init="fruit=['苹果1','苹果1']">
+<div ng-show="fruit.length"><!--[]为真  5个为假的 boolean-->
+    <!--ng-if区别  不成立不执行  ng-show会执行一次
+    //数据存不存在 用ng-if 数据频繁切换用ng-show  和ng-hide
+    但是 我们ng-if和 ng-repeat 配合使用；
+    -->
+    <div ng-repeat="f in fruit">
+        {{f}}
+    </div>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>

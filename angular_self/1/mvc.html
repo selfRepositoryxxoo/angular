@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="ctrl">
+
+    {{message}}{{sum()}}
+    <div ng-click="sum()">hello</div>
+    <!--{{}}是大括号返回的结果-->
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule', []);
+    /*当前作用域*/
+    app.controller('ctrl', function ($scope) {
+        $scope.message = 'yag';
+
+        $scope.sum = function () {
+         /*   return 1 * 3*/
+            alert('1');
+        }
+    })
+
+
+</script>

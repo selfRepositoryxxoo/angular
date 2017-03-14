@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    名字是： <input ng-model="name"/>
+    <h1>你输入的内容：{{name}}</h1>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    var sv=angular.module('myApp',[]);//产生一个myApp的模块。第二个模块是依赖的其他模块
+    sv.controller('myCtrl',function($scope){//这是一个控制器，每产生一个控制器，就会发送一个$scope的作用域，$scope默认是一个空对象，控制器就是为了给这个$scope就是为了给增加属性；也就是说所有的属性要全部放在$scope里面
+        $scope.name='yangchongduo'
+    })
+</script>

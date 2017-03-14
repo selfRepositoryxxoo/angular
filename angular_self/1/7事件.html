@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="ctrl">
+    <input type="text" ng-model="name" ng-change="change()"/>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule', []);
+   // ng上作用定义的方法 肯定在作用域上
+    app.controller('ctrl', function ($scope) {
+        //表单的change事件  什么时候写 什么
+        $scope.change=function(){
+            console.log($scope.name)
+        }
+    })
+</script>

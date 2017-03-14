@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="box"> {{name}}</div>
+<div ng-controller="test">{{name}}</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('app', []);
+    //不能同时创建两个app
+    app.controller('box', function ($scope) {
+        $scope.name = 1
+    });
+    app.controller('test', function ($scope) {
+        $scope.name = 2
+    })
+
+
+</script>

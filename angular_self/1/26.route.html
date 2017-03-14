@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<a href="#/home">主页</a>
+<a href="#/user">用户列表</a>
+<!--所有的应用的template都是显示在ng-view中的-->
+<div ng-view></div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script src="angular-route.js"></script>
+<script>
+    //但是不能嵌套
+    var app=angular.module('appModule',['ngRoute'])
+    //进行配置路由
+    app.config(function($routeProvider){
+        //$routeProvide实现页面跳转的
+        $routeProvider.when('/home',{
+            template:'<div>home</div>'
+        }).when('/user',{
+            template:'<div>user</div>'
+        }).otherwise('/home')
+
+    })
+
+
+
+</script>

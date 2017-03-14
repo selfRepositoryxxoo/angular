@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--<div ng-app="" ng-init="names=['jan','to','tt']">
+    <p>用来循环的 angular react是用map 好想都可以自己弄 而vue是通过v-for</p>；
+    <ul>
+        <li ng-repeat="x in  names">
+            {{x}}&lt;!&ndash;{{}}是将代码弄到HTML中&ndash;&gt;&lt;!&ndash;现在还没有出现控制
+            控制器中放着模型&ndash;&gt;
+        </li>
+    </ul>
+</div>-->
+<!--<div ng-init="person={name:'yangchongduo',age:7,sex:'nan'}">
+    <div ng-repeat="(key,value) in  person">&lt;!&ndash;vue 中使用v-for react使用map或者自己可以
+    $index  Vue也有这种  对象也有所引 $index
+
+    &ndash;&gt;
+        {{key}}:{{value}}:{{$index}}
+    </div>
+</div>-->
+</div>
+<!--<div ng-init="phones=[{name:'ipone',age:'3',type:['回色','金色花']},{name:'ipone',age:'3',type:['回色','金色花']}]">
+    <div ng-repeat="p in phones" ng-init="index=$index">
+        &lt;!&ndash;$index是当前的所引，index是定义的一个变量&ndash;&gt;
+        &lt;!&ndash;     <div ng-repeat="(index,p) in phones">
+        也可以这么写；  index可以是一个
+        </div>&ndash;&gt;
+        <div ng-repeat="pp in p.type">
+            {{index}}{{$index}}{{pp}}
+        </div>
+    </div>
+</div>-->
+<div ng-init="phone=['2','2','2']"><!--强制通过$index 便利
+只要是数组就增加下面的 track by $index-->
+    <div ng-repeat="p in phone track by $index">
+        {{p}}
+    </div>
+</div>
+<!--是通过内容遍历的  所以遍历对象是可以的 所以下面是可以得-->
+<div ng-init="phone=[{name:'2'},{name:'2'},{name:'2'}]">
+    <div ng-repeat="p in phone track by $index">
+        {{p}}
+    </div>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>

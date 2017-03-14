@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .title {
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            background: -webkit-linear-gradient(pink, yellow);
+        }
+
+        .content {
+            width: 100px;
+            height: 100px;
+            box-shadow: inset 1px 1px 1px 1px;
+        }
+    </style>
+</head>
+<body>
+<group>
+    <open title='这是第一的'>这是第一</open>
+    <open title='这是第二的'>这是第二</open>
+</group>
+
+<!--<open title='这是第一的'>这是第一</open>
+<open title='这是第二的'>这是第二</open>-->
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule', []);
+    app.directive('group',function(){
+        return{
+            restrict:'E',
+            //形成复用
+            controller:function($scope){
+                //所有的open 都归属于group管理，
+                var arr=[];
+                this.add=function(a){
+                    arr.push(a)
+                };
+                console.log(arr);
+                //怎么调用父级的方法
+                this.show=function(cur){
+                    //当前的点击的作用域
+                    arr.forEach(function(item){
+                       if(item!=cur){
+                           item.flag=false
+                       }
+                    })
+                }
+            }
+        }
+    });
+    app.directive('open', function () {
+        return {
+            //需要依赖于group
+            require:'^group',
+            restrict: 'E',
+            transclude: true,
+            //引用html模板
+            templateUrl: 'opener.html',
+            scope: {//生成各自的作用域；
+                title: '@'
+            },
+            //当前作用域下 生成作用域； //复用模板
+            link: function (scope, element, attrs,groupCtrl) {
+                //scope.title = attrs['title'] //这样还是最后一个
+                scope.flag=false;
+                //点击的时候到作用域上去找方法；
+                scope.show=function(){
+                    scope.flag=!scope.flag;
+                    groupCtrl.show(scope)
+                };
+                //当前打开的时候 只要有open指令就会执行add方法
+                groupCtrl.add(scope);//默认把作用域给父亲
+            }
+        }
+    })
+</script>

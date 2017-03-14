@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .block{
+            display: block;
+        }
+        .none{
+            display: none;
+        }
+    </style>
+</head>
+<body ng-init="value='true'">
+<button ng-click="value=!value">{{value?'显示':'隐藏'}}</button>
+<!--<div class="{{value?'block':'none'}}">content</div>-->
+<!--ng-hide 只是简单的操作css样式-->
+<div ng-show="value">content</div>
+<!--if是删除 不成立删除元素  第一次能确定下来的就用ng-if  内部指令不执行-->
+<div ng-if="value">content</div>
+<!--<button v-on:click="value='隐藏'">{{value}}</button>
+<button @click="value='隐藏'">{{value}}</button>-->
+</body>
+</html>
+<script src="angular.js"></script>

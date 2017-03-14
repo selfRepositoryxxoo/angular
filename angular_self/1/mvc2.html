@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="ctrl1">
+    {{name}}
+    <div ng-controller="ctrl2">{{name}}</div>
+</div>
+{{name}}
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule', []);
+    //当angular启动的时候 执行此方法
+    app.run(function($rootScope){
+        //这是全局的根作用域
+        $rootScope.name=100;
+        console.log('1')
+    })
+    app.controller('ctrl1', function ($scope) {
+        $scope.name = 100;
+        console.log('2')
+    })
+    app.controller('ctrl2', function ($scope) {
+        $scope.name = 200;
+        console.log('3')
+    })
+    //如果控制器嵌套会有继承关系；
+    //真实项目中 是数组的写法；
+   /* app.controller('ctrl1',['$scope',function($S){
+        $S.name=100;
+    }])*/
+</script>

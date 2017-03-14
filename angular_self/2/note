@@ -1,0 +1,2 @@
+ng-bind  和{{}}一样但是ng-bind不会闪烁
+ng-non-bindable  就是将{{}}

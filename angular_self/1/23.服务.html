@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<pre>
+  服务提供服务的方法
+</pre>
+<div class="form-group col-xs-4 col-xs-offset-4" ng-controller="ctrl">
+    <input type="text" class="form-control" ng-model="a">
+    <select class="form-control" ng-model="select">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" class="form-control" ng-model="b">
+    <button class="btn-primary btn" ng-click="method()">=</button>
+    {{total}}
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>//想用我们就注入进来就可以了，$timeout 注入就可以了
+    var app = angular.module('appModule', [])
+    app.controller('ctrl',function(my){//现在注入我的服务
+        this.method=function(){
+            console.log(this.select)//被选中的值
+        }
+    })
+    //创建服务的第一种方式；假如你定义的服务，就会默认调用 你的$get方法， 并将return返回给你
+// =>肩头函数 是唯一一个支持配置的的服务； 想配置什么就在函数里对应的服务；
+app.config(function(myProvider){//myProvider是provider当前服务的实例 这是面向对象的实例；
+    myProvider.currency='英镑'
+
+})
+    app.provider('my',function(){
+        this.currency='$'
+        this.$get=function(){
+            return {
+               '+':(a,b)=>a+b,
+               '-':(a,b)=>a-b,
+               '*':(a,b)=>a*b,
+               '/':(a,b)=>a/b
+
+            }
+        }
+    }
+
+</script>

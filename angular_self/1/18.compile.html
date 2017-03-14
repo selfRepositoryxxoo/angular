@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<my time="3"></my>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule', []);
+    app.directive('my', function () {
+        return {
+            //compile 在link之前执行，返回link函数执行；
+            //让你实现一个ng-repeat
+            template: '<div>ycd chn</div>',
+            compile: function (elements, attrs) {
+                console.log(elements)//当前指令的元素 这是juery对象
+                console.log(attrs)//当前指令的属性
+                //获取编译的次数
+                var times = attrs['time'];
+                //操作指令的模板
+                var tmpl = elements.children();
+                //因为之前已经有一个模板了，所以要-1
+                for (var i = 0; i < times-1; i++) {
+                    //必须有clone这个 不复制不行 因为就会操作一个；
+                    // insertBefore
+                    elements.append(tmpl.clone())
+                }
+            },
+            //当我们写了 compile就不用我们写link函数了
+            link: function () {
+            }
+        }
+    })
+</script>

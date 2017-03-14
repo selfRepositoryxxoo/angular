@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="ctrl">
+    商品的名字：{{product.name}}
+    价格：{{product.price}}<br>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    //满百包邮
+    var app = angular.module('appModule', []);
+    app.controller('ctrl', function ($scope) {
+    $scope.product={
+        name:'飞机',count:1,price:20,ems:10
+    }
+    })
+</script>

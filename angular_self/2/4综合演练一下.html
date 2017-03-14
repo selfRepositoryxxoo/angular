@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="app" ng-controller="myCtrl">
+    <p>家族的姓：{{sex}}</p>
+    <ul>
+        <li ng-repeat="x in names">{{x}} {{sex}}</li><!--这是一个迭代器 也是就for循环-->
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('myCtrl',function($scope,$rootScope){
+        $scope.names=['ti','t','ddf'];
+        $rootScope.sex='yang'
+    })
+
+
+
+</script>
+

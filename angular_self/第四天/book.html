@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div ng-controller="ctrl">
+    <table class="table table-responsive">
+        <tr>
+            <td>书的名字</td>
+            <td>书的树龄</td>
+            <td>书的价格</td>
+        </tr>
+        <tr ng-repeat="book in books">
+            <td>{{book.name}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <input type="text" ng-model="query" ng-change="getOne()" />
+    <div class="form-group">
+        <label class="control-label"></label>
+        <div class="form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="control-label"></label>
+        <div class="form-control"></div>
+    </div>
+    <div class="form-group">
+        <label class="control-label"></label>
+        <div class="form-control"></div>
+    </div>
+
+    书的名字：<input type="text" ng-model="list.name"/>
+    数的价格：<input type="text" ng-model="list.price"/>
+    书的价格<input type="text" ng-model="list.count"/>
+<button ng-click="save()">增加数</button>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app=angular.module('appModule',[]);
+    app.controller('ctrl',function($scope,$http){
+        $http({
+            url:'/books',
+            method:'get',
+        }).success(function(data){
+            $scope.books=data//默认的json的字符串 绑定在数据上
+        })
+        $scope.getOne=function(){
+           var id= $scope.query
+
+            $http({
+                url:'/book',
+                method:'get',
+                params:{id:id}//请求查询的id值
+            }).success(function(data){
+                $scope.books=data//默认的json的字符串 绑定在数据上
+            })
+        }
+    })
+</script>

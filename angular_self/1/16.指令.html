@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div ng-controller="ctrl">
+    <hello cd="{{title}}">
+        这是要保留的内容
+    </hello>
+    <pre>
+        1.先将控制器的属性进行传递，
+    </pre>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    //控制器 不写就不要写ng-controller  因为我们无法使用$scope的内容，
+    var app = angular.module('appModule', []);
+    app.controller('ctrl',function($scope){
+        $scope.title='模板中的标题'
+    })
+     app.directive('hello', function () {
+        return {
+            restrict: 'EA',//制定范围
+            transclude: true,//将指令的内部代码保存下来，放到ng-trasnclude
+            scope:{//@引用的是字符窜高
+                yy:'@cd'//当声明的名字和title:'@title'
+            },//scope:{}// 指令重复使用的时候，产生每个作用域，各自的作用域
+            templateUrl: 'tmpl.html',
+            link: function (scope, element, attrs) {
+                scope.title=attrs['title']//如果直接在作用域就保留一个 给每个指令设置独立的作用域
+            }
+
+        }
+    })
+</script>

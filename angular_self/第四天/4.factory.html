@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div class="form-group col-xs-4 col-xs-offset-4" ng-controller="ctrl">
+    <input type="text" class="form-control" ng-model="a">
+    <select class="form-control" ng-model="select">
+        <option value="+">+</option>
+    </select>
+    <input type="text" class="form-control" ng-model="b">
+    <button class="btn-primary btn" ng-click="method()">=</button>
+    {{total}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    //除了provider都是不可配置的
+    //factory直接返回对象
+    app.factory('my', function () {
+        return {
+            '+': function (a,b) {
+                return a+b
+            }
+        }
+    });
+    app.controller('ctrl', function ($scope,$timeout,my) {
+        $scope.method = function () {
+           $scope.total =  my['+']($scope.a,$scope.b);
+        }
+    })
+
+</script>
+</body>
+</html>

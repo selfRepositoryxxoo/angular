@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="ctrl">
+
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    //我们要装饰这个服务，需要配置这个服务；
+    必须要用控制器才会启动服务
+    var app=angular.module('appModule',[]);
+    app.config(function($provide){//app都是有config的但是 只有provider才可以注入到myProvider
+        //
+        //以前的对象 $provide也是一个服务；/在线上跑的时候看看时间；
+        $provide.decorator('my',function($delegate){//$delegate是我们代理的服务就是my
+            var fn=$delegate
+            $delegate.name=function(){
+               /* $delegate.name='big'+$delegate.name*/
+                return 'big'+fn()
+            }
+            return $delegate
+        })
+
+    })
+    app.provider('my',function(){
+        return {
+           name:function(){
+               return 'ycd'
+           }
+        }
+    })
+    app.controller('ctrl',function(my){
+        console.log(my.name)
+    })
+孙海洋 刚才那个  什么时间跑的 什么时候出错的；
+
+</script>

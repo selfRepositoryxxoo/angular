@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="ctrl">
+
+    Element<my-directive> </my-directive>
+Attribute: <div my-directive></div>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule', []);
+    //默认的指令不会创建的作用域  不是独立的作用于域 找最近的作用域； 控制器是创建作用域的
+    //顺序：先渲染控制器
+    app.controller('ctrl',['$scope',function($scope){
+       // $scope.name='ycd' //和当前作用域下
+    }]);
+    app.directive('myDirective',function(){
+        return {
+            restrict:'EA',//
+            replace:true,
+            template:'<div> hello angular {{name}}</div>',
+            link:function(scope,element,attrs){
+                scope.name='ycd'//这是在scope作用下 当前指令的作用域下
+                //模板和作用域的；
+            }
+        }
+    })
+
+
+</script>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div ng-controller="car">
+    <table class="table-responsive table">
+        <tr>
+            <td>全选 <input type="checkbox" ng-model="checkAll" ng-click="checks()"/></td>
+            <td>单价</td>
+            <td>商品</td>
+            <td>数量</td>
+            <td>小计</td>
+            <td>操作</td>
+        </tr>
+        <tr ng-repeat="book in books">
+            <td><input type="checkbox" ng-model="book.selected" ng-click="select()"/></td>
+            <td>{{book.name}}</td>
+            <td>{{book.price}}</td>
+            <td>
+                <button ng-click="book.count=book.count-1" ng-disabled="book.count==1">-</button>
+                <input type="text" ng-model="book.count" ng-readonly="true"/>
+                <!--ng-readonly是只能读 不能-->
+                <button ng-click="book.count=book.count+1">+</button>
+            </td>
+            <td>{{book.price*book.count}}</td>
+            <td>
+                <button class="btn btn-danger" ng-disabled="!book.selected" ng-click="remove(book)">删除</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                总价格{{total()}}      <button class="btn btn-danger" ng-click='removecl()'>删除选中的商品</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule', []);
+    //ng-disable  如果值为
+    app.controller('car', function ($scope) {
+        $scope.books = [
+            {name: 'Angulars', price: 40, count: 1, selected: false},
+            {name: 'nodejs', price: 354, count: 1, selected: false},
+            {name: 'reactjs', price: 5, count: 1, selected: false},
+            {name: 'Vue.js', price: 100, count: 1, selected: false},
+            {name: 'java', price: 100, count: 1, selected: false},
+            {name: 'php', price: 300, count: 1, selected: false}
+        ]
+        $scope.checks = function () {
+            var cur = $scope.checkAll;
+            console.log(cur);//true
+            angular.forEach($scope.books, function (item) {
+                item.selected = cur
+            })
+        }
+        $scope.select = function () {
+            var flag = true
+            angular.forEach($scope.books, function (item) {
+                if (!item.selected)flag = false
+            })
+            $scope.checkAll = flag
+        }
+        $scope.remove=function(book){
+            //将不满足条件的过滤掉  满足的组成一份 是自己就不返回 
+            $scope.books=$scope.books.filter(function(item){
+                return item!=book
+            })
+        }
+        $scope.total=function(){
+            var sum=0;
+            angular.forEach($scope.books, function (item) {
+                if (item.selected){
+                    sum+=item.price*item.count
+                }
+            })
+            return sum
+        }
+        $scope.removeSelect=function(){
+            $scope.books=$scope.books.filter(function(item){
+                if(!item.selected){
+                    return item
+                }
+
+            })
+        }
+    })
+</script>

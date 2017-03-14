@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="myCtrl as vm">
+<my title="{{title}}"></my>
+<!--<pre>
+    vm 就是控制器的实例  面向对象的过程；  vm=new Controller() 创建控制器就是创建一个类
+</pre>-->
+</body>
+</html>
+<script src="angular.js"></script>
+<script >
+    //控制器 就是来挂在数据了
+    var app=angular.module('app',[]);
+    app.controller('myCtrl',function(){
+        console.log(this);
+        //this.add='123';
+        this.title='ycd'
+        //this 就是 controller 衍生出来的实例； 就是为了$scope写入
+    })
+    app.directive('my',function(){
+        return {
+            template:'<div>hello{{cd}}</div>',
+            scope:{
+                cd:'@title'
+            }
+        }
+    })
+
+
+</script>

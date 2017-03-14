@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div>
+    <hello title="这是第一个标题">
+        这是要保留的内容
+    </hello>
+    <hello title="这是第er个标题">
+        这是要保留的内容
+    </hello>
+    <hello title="这是san个标题">
+        这是要保留的内容
+    </hello>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    //控制器 不写就不要写ng-controller
+    var app = angular.module('appModule', []);
+     app.directive('hello', function () {
+        return {
+            restrict: 'EA',//制定范围
+            transclude: true,//将指令的内部代码保存下来，放到ng-trasnclude
+            scope:{},//scope:{}// 指令重复使用的时候，产生每个作用域，各自的作用域
+            templateUrl: 'tmpl.html',
+            link: function (scope, element, attrs) {
+                scope.title=attrs['title']//如果直接在作用域就保留一个 给每个指令设置独立的作用域
+                console.log(attrs['title'])
+            }
+
+        }
+    })
+</script>

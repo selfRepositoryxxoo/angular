@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" ng-model="name"/>
+<!--读的数据显示不同的模板  下面name是个变量-->
+<div ng-switch="name">
+    <div ng-switch-when="hello">hello</div>
+    <div ng-switch-when="world">world</div>
+    <div ng-switch-default>hello world</div>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+ng-switch-when="hello"  "hello"这是字符串

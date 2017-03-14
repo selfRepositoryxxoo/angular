@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        [ng-cloak] {
+            display: none;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body ng-init="course=[{name:'yang',chinese:70,math:29},{name:'yang',chinese:55,math:66},{name:'yang',chinese:30,math:49}]">
+<div ng-init="flag=true">
+    <table class="table table-bordered">
+        <tr>
+            <td>名字</td>
+            <td ng-click="flag=!flag">国语分</td>
+            <td>数学分</td>
+        </tr>
+        <tr ng-repeat=" c in course|orderBy:'chinese':flag">
+            <!--orderBy是通过 什么排序 true是正序-->
+            <td>{{c.name}}</td>
+            <td>{{c.chinese}}</td>
+            <td>{{c.math}}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>

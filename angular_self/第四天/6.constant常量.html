@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div class="form-group col-xs-4 col-xs-offset-4" ng-controller="ctrl">
+    <input type="text" class="form-control" ng-model="a">
+    <select class="form-control" ng-model="select">
+        <option value="+">+</option>
+    </select>
+    <input type="text" class="form-control" ng-model="b">
+    <button class="btn-primary btn" ng-click="method()">=</button>
+    {{total}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    //除了provider都是不可配置的
+    //factory直接返回对象
+    app.config(function (my) {
+        //constant是常量不是服务，所有不需要加Provider
+        my.name = 'zfpx';
+    })
+   /* app.constant('my', {
+        //直接给实例添加方法
+        '+':function (a,b) {
+            return a+b;
+        }
+    });*/
+    app.value('my', {
+        //直接给实例添加方法
+        '+':function (a,b) {
+            return a+b;
+        }
+    });
+    app.controller('ctrl', function ($scope,$timeout,my) {
+        console.log(my.name);
+        $scope.method = function () {
+           $scope.total =  my['+']($scope.a,$scope.b);
+        }
+    });
+    //provider是可配置的默认调用$get方法，factory返回的是对象，service直接给当前的实例添加属性，constant常量可以进行配置，value不可配置
+
+
+
+
+
+
+</script>
+</body>
+</html>

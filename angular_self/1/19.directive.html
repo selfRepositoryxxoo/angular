@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="app">
+<girl lovemoney></girl>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    // 指令的分类
+    // 装饰的指令
+    // 组件式指令美化这个组件
+    var app = angular.module('appModule', []);
+    app.controller('app',function($scope){
+
+    })
+    app.directive('girl', function () {
+        return {
+            template: '<div ng-click="show()">angular mm</div>',
+            //可共享方法； 当前指令的控制器  只要别人依赖他了就可以使用它的方法
+            //girl暴露了一个接口 让其实现
+            controller: function ($scope) {
+                $scope.arr=[]
+                this.add=function(props){
+                    $scope.arr.push(props)
+                }
+            },//链接视图的  div这个方法点击的时候 我们需要到作用域上找方法，
+            //同时实例上的方法 需要到实例上去找
+            link:function(scope,element,attrs){
+                scope.show=function(){
+                    alert(scope.arr)
+                }
+            }
+        }
+    })
+    app.directive('lovemoney', function () {
+        //当前的指令 是依赖于girl
+        return {
+            //因为当前的lovemoney 和lovecry是当前的指令
+            require: '^girl',//
+           /* require: '^girl',//平级和上一级这种最长用
+            require: '?^girl',//找不到不报错
+            require: '?^girl'*/
+            //当我们依赖了girl指令就会默认吧girl的控制的实例注入进来
+            link:function(scope,element,attrs,girlCtrl){
+                //girlctrl
+                girlCtrl.add('lovemoney');
+                console.log(scope.arr)
+
+            }
+        }
+    })
+</script>

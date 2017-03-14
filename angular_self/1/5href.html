@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="ctrl">
+    <img ng-src="{{src}}" alt=""/>
+    不会让你点击的 ng-href 假如有定时器的话；<br/>
+    <a ng-href=""></a>
+    <a :href=""></a>
+</div>
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule', []);
+    app.controller('ctrl', function ($scope) {
+    $scope.src=''
+    })
+</script>

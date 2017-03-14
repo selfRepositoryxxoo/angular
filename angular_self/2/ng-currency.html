@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--用费多少钱-->
+<div ng-init="product=[{name:'苹果',price:400},{name:'苹果',price:400}]">
+    <div ng-repeat="p in product">
+        {{p.name}}{{p.price|currency:'$'}}
+    </div>
+</div>
+{{200|currency:'￡'}}
+<p>{{'aaaaa'|uppercase}}</p>
+<p>{{'aaaaa'|lowercase}}</p>
+<p>{{'12341678697979'|limitTo:5}}</p>
+<p>{{123342342342.1267778|number:2}}</p><!--保留两位小数-->
+<pre><!--pre将原本的数据输出 不改变其他的样式-->
+<p>{{product|json}}</p>
+</pre>
+<!--
+时间戳
+new Date().getTime()
+1467793635011
+-->
+{{1467793635011|date:'yyyy-MM hh:mm:ss'}}
+{{1467793635011|date:'yyyy年MM月 hh时mm分ss秒'}}
+
+</body>
+</html>
+<script src="angular.js"></script>
+<script>
+    //currency 是钱的种类
+   // 我们不修改数据  数据和模型  数据和模型绑定在一起
+</script>
