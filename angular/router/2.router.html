@@ -45,24 +45,33 @@
             controller: function ($scope,$state) {//$state跳转页面等同于$location
                 $scope.go = function () {
                     //路由传递参数
-                    $state.go('home.play',{name:'zpfx'})
+                    $state.go('home.play.test',{name:'zpfx'})
                 }
             }
         }).state('home.play',{
             url:'/play/:name',//谨记：这是路径
             templateUrl:'tmpl/play.html',
             controller: function ($scope,$stateParams) {//routeParams
+                console.log('xxx')
                 $scope.name = $stateParams.name;
                 //通过$stateParams将参数取过来
             }
-
+        }).state('home.play.test',{
+            url:'/test',
+            templateUrl:'tmpl/test.html',
+            controller:function ($scope,$stateParams) {
+                //console.log($stateParams.name)
+                console.log('-------------')
+            }
         }).state('user',{
             url:'/user',
             template:'<div>user</div>'
         });
         //配置不满足的路由,$urlRouterProvider自带的服务
         $urlRouterProvider.otherwise('home');
-    })
+    }).run(['$rootScope',function ($rootScope) {
+        console.log('-------------')
+    }])
 </script>
 
 
